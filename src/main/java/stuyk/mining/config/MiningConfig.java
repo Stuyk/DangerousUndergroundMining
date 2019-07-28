@@ -9,13 +9,14 @@ import java.util.*;
 @SerializableAs("MiningConfig")
 public class MiningConfig implements ConfigurationSerializable, Cloneable
 {
-    private int depth;
-    private int supportRange;
-    private boolean lightRequired;
-    private int lightLevel;
-    private int mineshaftTotalBlockCount;
-    private int mineshaftBlockCount;
-    private int safetyScale;
+    private final int depth;
+    private final int supportRange;
+    private final boolean lightRequired;
+    private final int lightLevel;
+    private final int mineshaftTotalBlockCount;
+    private final int mineshaftBlockCount;
+    private final int safetyScale;
+    private final int heightThreshold;
     private List<Material> supportMaterials;
     private List<String> unstableMessages;
     private List<Material> collapseMaterials;
@@ -23,7 +24,7 @@ public class MiningConfig implements ConfigurationSerializable, Cloneable
 
     public MiningConfig(int depth, int supportRange, boolean lightRequired, int lightLevel,
                         int mineshaftTotalBlockCount, int mineshaftBlockCount, int safetyScale,
-                        List<Material> supportMaterials, List<String> unstableMessages,
+                        int heightThreshold, List<Material> supportMaterials, List<String> unstableMessages,
                         List<Material> collapseMaterials, List<String> collapseMessages)
     {
         this.depth = depth;
@@ -33,6 +34,7 @@ public class MiningConfig implements ConfigurationSerializable, Cloneable
         this.mineshaftTotalBlockCount = mineshaftTotalBlockCount;
         this.mineshaftBlockCount = mineshaftBlockCount;
         this.safetyScale = safetyScale;
+        this.heightThreshold = heightThreshold;
         this.supportMaterials = supportMaterials;
         this.unstableMessages = unstableMessages;
         this.collapseMaterials = collapseMaterials;
@@ -50,6 +52,7 @@ public class MiningConfig implements ConfigurationSerializable, Cloneable
         map.put("mineshaft-total-block-count", mineshaftTotalBlockCount);
         map.put("mineshaft-block-count", mineshaftBlockCount);
         map.put("safety-scale", safetyScale);
+        map.put("height-threshold", heightThreshold);
         List<String> supportMats = new LinkedList<>();
         for(Material m : supportMaterials)
         {
@@ -76,7 +79,8 @@ public class MiningConfig implements ConfigurationSerializable, Cloneable
         int lightLevel = getIfValid(map, "light-level", Integer.class, 6);
         int mineshaftTotalBlockCount = getIfValid(map, "mineshaft-total-count", Integer.class, 15);
         int mineshaftBlockCount = getIfValid(map, "mineshaft-block-count", Integer.class, 7);
-        int safetyScale = getIfValid(map, "safety-scale", Integer.class, 5000);
+        int safetyScale = getIfValid(map, "safety-scale", Integer.class, 2500);
+        int heightThreshhold = getIfValid(map, "height-threshold", Integer.class, 5);
 
         ArrayList<String> supportMaterialValues = getIfValid(map, "support-materials", ArrayList.class, new ArrayList());
         List<Material> supportMaterials = new LinkedList<>();
@@ -104,7 +108,7 @@ public class MiningConfig implements ConfigurationSerializable, Cloneable
         ArrayList<String> collapseMessages = getIfValid(map, "collapse-messages", ArrayList.class, new ArrayList());
 
         return new MiningConfig(depth, supportRange, lightRequired, lightLevel, mineshaftTotalBlockCount,
-                mineshaftBlockCount, safetyScale, supportMaterials, unstableMessages, collapseMaterials,
+                mineshaftBlockCount, safetyScale, heightThreshhold, supportMaterials, unstableMessages, collapseMaterials,
                 collapseMessages);
     }
 
@@ -175,5 +179,10 @@ public class MiningConfig implements ConfigurationSerializable, Cloneable
     public int getSupportRange()
     {
         return supportRange;
+    }
+
+    public int getHeightThreshold()
+    {
+        return heightThreshold;
     }
 }

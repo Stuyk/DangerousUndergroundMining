@@ -50,7 +50,7 @@ public class MiningHandler implements Listener {
 	
 	private void attemptCeilingAccident(BlockBreakEvent event) {
 		// Check the blocks around the player and verify they're solid supports.
-		if(getMiningSupportSafetyRank(event.getPlayer()) >= instance.getConfiguration().getSafetyScale() / event.getPlayer().getHeight() / 5) {
+		if(instance.getCalculator().getMiningSupportSafetyRank(event.getPlayer()) >= instance.getCalculator().getRequiredRank(event.getPlayer())) {
 			return;
 		}
 
@@ -69,39 +69,6 @@ public class MiningHandler implements Listener {
 		if (event.getPlayer().getLocation().getBlock().getRelative(0, 1, 0).getLightLevel() <= instance.getConfiguration().getLightLevel()) {
 			event.setCancelled(true);
 		}
-	}
-
-	public int getMiningSupportSafetyRank(Player player) {
-		// Get first block player is near.
-		Location relativeBlock = player.getLocation();
-		
-		int safetyThreshold = 0;
-		
-		// Gather all of the blocks around the player.
-		for (int x = relativeBlock.getBlockX() - instance.getConfiguration().getSupportRange(); x <= relativeBlock.getBlockX() + instance.getConfiguration().getSupportRange(); x++) {
-			for (int z = relativeBlock.getBlockZ() - instance.getConfiguration().getSupportRange(); z <= relativeBlock.getBlockZ() + instance.getConfiguration().getSupportRange(); z++) {
-				for (int y = relativeBlock.getBlockY() - instance.getConfiguration().getSupportRange(); y <= relativeBlock.getBlockY() + instance.getConfiguration().getSupportRange(); y++) {
-					// Check the type of each block around the player.
-					World w = relativeBlock.getWorld();
-					if(w == null)
-					{
-						continue;
-					}
-					Block targetBlock = relativeBlock.getWorld().getBlockAt(x, y, z);
-					// Check if the block is of the supported type. If not, skip this block.
-					if (!ClassicCalculator.isValidBlockType(instance.getConfiguration().getSupportMaterials(), targetBlock)) {
-						continue;
-					}
-					// If it is...
-					// Add to our safety threshold
-					safetyThreshold += instance.getCalculator().getSafetyRank(targetBlock);
-					// If there is not enough safety continue searching for more supports.
-					// If there is enough safety. Finish the loop and break out.
-				}
-			}
-		}
-		
-		return safetyThreshold;
 	}
 
 	// The higher the probability the less often it'll happen.

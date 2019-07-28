@@ -1,11 +1,12 @@
 package stuyk.mining.mining;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import stuyk.mining.DangerousUndergroundMining;
-import stuyk.mining.mining.StructureCalculator;
 
 import java.util.List;
 
@@ -98,5 +99,44 @@ public final class ClassicCalculator implements StructureCalculator
 			}
 		}
 		return false;
+	}
+
+	public int getMiningSupportSafetyRank(Player player) {
+		// Get first block player is near.
+		Location relativeBlock = player.getLocation();
+
+		int safetyThreshold = 0;
+
+		// Gather all of the blocks around the player.
+		for (int x = relativeBlock.getBlockX() - instance.getConfiguration().getSupportRange(); x <= relativeBlock.getBlockX() + instance.getConfiguration().getSupportRange(); x++) {
+			for (int z = relativeBlock.getBlockZ() - instance.getConfiguration().getSupportRange(); z <= relativeBlock.getBlockZ() + instance.getConfiguration().getSupportRange(); z++) {
+				for (int y = relativeBlock.getBlockY() - instance.getConfiguration().getSupportRange(); y <= relativeBlock.getBlockY() + instance.getConfiguration().getSupportRange(); y++) {
+					// Check the type of each block around the player.
+					World w = relativeBlock.getWorld();
+					if(w == null)
+					{
+						continue;
+					}
+					Block targetBlock = relativeBlock.getWorld().getBlockAt(x, y, z);
+					// Check if the block is of the supported type. If not, skip this block.
+					if (!ClassicCalculator.isValidBlockType(instance.getConfiguration().getSupportMaterials(), targetBlock)) {
+						continue;
+					}
+					// If it is...
+					// Add to our safety threshold
+					safetyThreshold += instance.getCalculator().getSafetyRank(targetBlock);
+					// If there is not enough safety continue searching for more supports.
+					// If there is enough safety. Finish the loop and break out.
+				}
+			}
+		}
+
+		return safetyThreshold;
+	}
+
+	@Override
+	public int getRequiredRank(Player player)
+	{
+		return instance.getConfiguration().getSafetyScale() / player.getLocation().getBlockY() / instance.getConfiguration().getHeightThreshold();
 	}
 }
