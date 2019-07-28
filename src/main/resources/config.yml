@@ -10,8 +10,8 @@ config:
   light-level: 6
   # How many blocks should we check for above the player's head.
   mineshaft-total-block-count: 15
-  # This divided by height is what is required to mine safely.
-  safety-scale: 5000
+  # This divided by (height / threshold) is what is required to mine safely.
+  safety-scale: 250
   # How many blocks above the player's head should be necessary to count as a mine shaft.
   mineshaft-block-count: 7
   # How many blocks per additional safety requirement?
