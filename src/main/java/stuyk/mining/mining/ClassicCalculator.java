@@ -18,14 +18,6 @@ public final class ClassicCalculator implements StructureCalculator
 		this.instance = instance;
 	}
 	
-	public static Material[] validMiningItems = new Material[] {
-			Material.DIAMOND_PICKAXE,
-			Material.GOLDEN_PICKAXE,
-			Material.IRON_PICKAXE,
-			Material.STONE_PICKAXE,
-			Material.WOODEN_PICKAXE
-	};
-	
 	// How many blocks of X type are above the player.
 	public int getValidBlocksAbovePlayer(int totalAbove, Player player) {
 		// Declare an integer that will be our count.
