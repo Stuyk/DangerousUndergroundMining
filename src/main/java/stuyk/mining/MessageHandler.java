@@ -24,12 +24,12 @@ public class MessageHandler {
 
 	public void sendCollapseMessage(Player player) {
 		int randomMessageID = new Random().nextInt(collapseMessages.size());
-		player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(unstableMessages.get(randomMessageID), ChatColor.RED));
+		player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(unstableMessages.get(randomMessageID)));
 	}
 
 	public void sendUnstableMessage(Player player)
 	{
 		int randomMessageID = new Random().nextInt(unstableMessages.size());
-		player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(unstableMessages.get(randomMessageID), ChatColor.GRAY));
+		player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(unstableMessages.get(randomMessageID)));
 	}
 }
