@@ -15,7 +15,7 @@ import stuyk.mining.mining.ClassicCalculator;
 public class MiningHandler implements Listener {
 	// Create an instance of the instance class.
 	
-	DangerousUndergroundMining instance;
+	private DangerousUndergroundMining instance;
 	
 	// Construct our class with an instance of the instance class.
 	public MiningHandler(DangerousUndergroundMining instance) {

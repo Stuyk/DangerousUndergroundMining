@@ -10,7 +10,7 @@ import net.md_5.bungee.api.ChatColor;
 import stuyk.mining.mining.ClassicCalculator;
 
 public class StructureIntegrityHandler implements Listener {
-	DangerousUndergroundMining instance;
+	private DangerousUndergroundMining instance;
 	
 	public StructureIntegrityHandler(DangerousUndergroundMining instance) {
 		this.instance = instance;

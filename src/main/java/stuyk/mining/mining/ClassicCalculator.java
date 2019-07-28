@@ -11,7 +11,7 @@ import java.util.List;
 
 public final class ClassicCalculator implements StructureCalculator
 {
-	DangerousUndergroundMining instance;
+	private DangerousUndergroundMining instance;
 
 	public ClassicCalculator(DangerousUndergroundMining instance)
 	{
