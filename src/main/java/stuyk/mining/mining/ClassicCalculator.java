@@ -137,6 +137,6 @@ public final class ClassicCalculator implements StructureCalculator
 	@Override
 	public int getRequiredRank(Player player)
 	{
-		return instance.getConfiguration().getSafetyScale() / player.getLocation().getBlockY() / instance.getConfiguration().getHeightThreshold();
+		return instance.getConfiguration().getSafetyScale() / (player.getLocation().getBlockY() / instance.getConfiguration().getHeightThreshold());
 	}
 }
