@@ -1,0 +1,87 @@
+config:
+  ==: MiningConfig
+  # How deep a player needs to be before things collapse.
+  depth: 40
+  # How far in each direction supports are effective.
+  support-radius: 5
+  # Whether light is required to mine.
+  light-required: false
+  # If the above is true, how dark it can be for players to mine.
+  light-level: 6
+  # How many blocks should we check for above the player's head.
+  mineshaft-total-block-count: 15
+  # This divided by height is what is required to mine safely.
+  safety-scale: 5000
+  # How many blocks above the player's head should be necessary to count as a mine shaft.
+  mineshaft-block-count: 7
+  # What materials should support a mineshaft?
+  support-materials:
+    # Logs
+    - OAK_LOG
+    - SPRUCE_LOG
+    - BIRCH_LOG
+    - JUNGLE_LOG
+    - ACACIA_LOG
+    - DARK_OAK_LOG
+    - STRIPPED_OAK_LOG
+    - STRIPPED_SPRUCE_LOG
+    - STRIPPED_BIRCH_LOG
+    - STRIPPED_JUNGLE_LOG
+    - STRIPPED_ACACIA_LOG
+    - STRIPPED_DARK_OAK_LOG
+    - OAK_WOOD
+    - SPRUCE_WOOD
+    - BIRCH_WOOD
+    - JUNGLE_WOOD
+    - ACACIA_WOOD
+    - DARK_OAK_WOOD
+    # Fences and Walls
+    - OAK_FENCE
+    - SPRUCE_FENCE
+    - BIRCH_FENCE
+    - JUNGLE_FENCE
+    - ACACIA_FENCE
+    - DARK_OAK_FENCE
+    - END_STONE_BRICK_WALL
+    - STONE_BRICK_WALL
+    - MOSSY_COBBLESTONE_WALL
+    - NETHER_BRICK_FENCE
+    - NETHER_BRICK_WALL
+    # Processed materials
+    - BRICK_WALL
+    - BRICK
+    - NETHER_BRICK
+    - STONE_BRICKS
+    - CHISELED_STONE_BRICKS
+    - MOSSY_STONE_BRICKS
+    - POLISHED_ANDESITE
+    - POLISHED_GRANITE
+    - POLISHED_DIORITE
+  unstable-messages:
+    - "Small pebbles fall from the ceiling and impact the ground around you."
+    - "The ceiling shifts slightly behind you."
+    - "You hear stone grinding on stone from the tunnel around you."
+  # What materials are allowed to collapse?
+  collapse-materials:
+    - STONE
+    - COBBLESTONE
+    - SANDSTONE
+    - GRAVEL
+    - ANDESITE
+    - DIORITE
+    - GRANITE
+    - SANDSTONE
+    - NETHER_BRICK
+    - TORCH
+    - DIRT
+    - IRON_ORE
+    - COAL_ORE
+    - DIAMOND_ORE
+    - LAPIS_ORE
+    - EMERALD_ORE
+    - GOLD_ORE
+    - NETHER_QUARTZ_ORE
+    - REDSTONE_ORE
+  collapse-messages:
+    - "The ceiling shifts, and collapses around you."
+    - "The tunnel suddenly collapses."
