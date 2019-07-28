@@ -30,6 +30,6 @@ public class StructureIntegrityHandler implements Listener {
 		
 		// Tell the player what the current safety rating is for the structure he's building.
 		int safetyRank = instance.getCalculator().getSafetyRank(event.getBlock());
-		event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("§fStructure Rating: " + safetyRank + "."));
+		event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("§fStructure Rating: " + instance.getCalculator().getMiningSupportSafetyRank(event.getPlayer()) + "/" + instance.getCalculator().getRequiredRank(event.getPlayer())));
 	}
 }
