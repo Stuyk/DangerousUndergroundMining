@@ -1,0 +1,4 @@
+name: DUM
+main: stuyk.mining.DangerousUndergroundMining
+version: @version@
+api-version: "1.13"

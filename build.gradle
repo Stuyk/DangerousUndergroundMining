@@ -1,0 +1,60 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath group: 'com.github.rodionmoiseev.gradle.plugins', name: 'idea-utils', version: '0.2'
+    }
+}
+
+plugins {
+
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+}
+
+idea {
+    project {
+        ipr {
+            withXml { xmlProvider ->
+                def project = xmlProvider.asNode()
+                def runConfigs = new XmlParser().parse(new File("config/intellij_runconfigs.txt"))
+                project.append(runConfigs)
+            }
+        }
+    }
+}
+
+repositories {
+    mavenLocal()
+    jcenter()
+    maven {
+        url "https://hub.spigotmc.org/nexus/content/repositories/snapshots"
+    }
+    maven {
+        url "https://oss.sonatype.org/content/groups/public"
+    }
+    maven {
+        url 'https://jitpack.io'
+    }
+}
+
+group = "net.javaforge.minecraft.spigot"
+version = project.property("version")
+sourceCompatibility = 1.8
+
+
+dependencies {
+    compileOnly "org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT"
+}
+
+processResources {
+    filter ReplaceTokens, tokens: [
+            "version": project.property("version")
+    ]
+}
